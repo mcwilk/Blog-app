@@ -1,0 +1,113 @@
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
+
+#container  /* przykładowy komentarz */
+{
+    width: 1000px;
+    margin-left: auto;      /* dzięki auto mamy container na środku strony */
+    margin-right: auto;     /* dzięki auto mamy container na środku strony */
+}
+
+#topbar
+{
+    font-family: 'Yeseva One', cursive;
+    color: #ffffff;       /* kolor czcionki */
+    font-size: 44px;
+    letter-spacing: 3px;    /* rozstrzelenie liter */
+    background-color: black;
+    padding: 25px 0px 30px 30px;          /* wypełnienie diva w środku (odsunięcie krawędzi 
+                                            diva od np. tekstu (top, right, bottom, left) */
+}
+
+#adminbar
+{
+    background-color: rgba(250, 50, 50, 0.973);
+    color: white;
+    font-weight: bold;
+    padding: 10px 0px 10px 30px;
+}
+
+#post
+{
+    float: left;
+    width: 800px;
+    background-color: rgb(83, 83, 83);
+    color: white;
+    margin: 30px 20px 0px 0px;
+    text-align: justify;
+    padding: 0px 30px 20px 30px;
+    font-size: 15px;
+    box-shadow: 7px 7px #252525
+}
+
+#title
+{
+    float: left;
+    width: 700px;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px 0px 10px 0px;
+    border-bottom: 1px solid white;
+}
+
+#date
+{
+    float: left;
+    width: 100px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 31px 0px 10px 0px;
+    border-bottom: 1px solid white;
+}
+
+#content
+{
+    padding-top: 80px;
+}
+
+#archive
+{
+    float: left;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: 120px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#archive_title
+{
+    padding-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.year
+{
+    padding: 10px 0px 10px 0px;
+    font-size: 17px;
+    margin: 0px 8px 8px 8px;
+}
+
+.year:hover
+{
+    background-color: rgb(54, 54, 54);
+    cursor: pointer;
+}
+
+#footer
+{
+    clear: both;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 0px;
+}

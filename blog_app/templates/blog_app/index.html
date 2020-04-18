@@ -1,0 +1,32 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    {% for post in post_list %}
+        <div id="post">
+            <div id="title">
+                {{ post.title }}
+            </div>
+
+            <div id="date">
+                {{ post.publication_date|date:'d-m-Y' }}
+            </div>
+
+            <div id="content">
+                {{post.text|truncatechars:1000}}
+            </div>
+        
+        </div>  
+
+        {% if post.id == last_post_id %}
+        <div id="archive">
+            <div id="archive_title">Archive</div>
+            <div class="year">2020</div>
+            <div class="year">2019</div>
+            <div class="year">2018</div>
+            <div class="year">2017</div>
+            <div class="year">2016</div>
+        </div>
+        {% endif %}
+        
+    {% endfor %}
+{% endblock %}
