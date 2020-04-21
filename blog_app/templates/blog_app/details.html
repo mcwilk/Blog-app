@@ -1,0 +1,30 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div id="leftside">
+    {% else %}
+    <div id="fullpage">
+    {% endif %}
+        <div class="post_details">
+            <div class="title_details">
+                {{ post.title }}
+                {% if post.publication_date %}
+                    <span>{{ post.publication_date|date:'d-m-Y' }}</span>
+                {% endif %}
+            </div>
+            <div class='content_details'>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+            <div class='author'>
+                {{ post.author }}
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div id="rightside">
+            <span><a href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+    {% endif %}
+{% endblock %}

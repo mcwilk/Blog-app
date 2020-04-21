@@ -1,0 +1,15 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    {% if post %}
+        <h2>Edit post</h2>
+    {% else %}
+        <h2>Add new post</h2>
+    {% endif %}
+    <div class=post_form>
+        <form method="POST">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary pull-right" type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}
