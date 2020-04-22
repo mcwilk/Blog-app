@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.utils import timezone
 from .models import Post
-from .forms import PostSheet, SignupForm
+from .forms import PostSheet, SignupForm, CommentForm
 
 def index(request):
     post_list = Post.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:]
@@ -12,8 +12,22 @@ def index(request):
 
 def details(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comments_list = post.comments.all().order_by('-created_on')
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
 
-    return render(request, 'blog_app/details.html', {'post': post})
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('details', pk=post.pk)
+    
+    else:
+        form = CommentForm()
+    
+    return render(request, 'blog_app/details.html', {'post': post, 'comments_list':comments_list, 'form': form})
 
 @login_required
 def post_add(request):

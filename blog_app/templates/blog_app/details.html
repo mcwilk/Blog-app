@@ -19,9 +19,19 @@
             <div class='author'>
                 {{ post.author }}
             </div>
-            {% for comment in post.comments.all %}
+            {% if user.is_authenticated %}
+                <div class=comment_form>
+                    <form method="POST">{% csrf_token %}
+                        {{ form.as_p }}
+                        <button style="margin-right: 10px;" class="btn btn-primary pull-right" type="submit">Send</button>
+                    </form>
+                </div>
+            {% else %}
+                <p> To add comments you need to <a href="{% url 'login' %}">LogIn</a></p>
+            {% endif %}
+            {% for comment in comments_list %}
                 <div class="comment">
-                    <div class="date">{{ comment.created_date }}</div>
+                    <div class="date">{{ comment.created_on }}</div>
                     <strong>{{ comment.author }}</strong>
                     <p>{{ comment.text|linebreaks }}</p>
                 </div>

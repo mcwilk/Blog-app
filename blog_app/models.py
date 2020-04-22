@@ -19,7 +19,7 @@ class Comment(models.Model):
     post = models.ForeignKey('blog_app.Post', on_delete=models.CASCADE, related_name='comments')
     text = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='comment_author')
-    creation_date = models.DateTimeField(default=timezone.now)
+    created_on = models.DateTimeField(default=timezone.now)
     approval = models.BooleanField(default=False)
 
     def __str__(self):
