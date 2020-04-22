@@ -12,9 +12,9 @@
                 </div>
 
                 <div class="content">
-                    {{post.text|truncatechars:1000}}
+                    {{post.text|truncatechars:1500}}
                 </div>
-                    
+                <a href="{% url 'details' pk=post.pk %}">{{ post.comments.count }} comments</a>
             </div>
         {% endfor %}
 

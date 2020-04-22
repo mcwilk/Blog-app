@@ -1,0 +1,30 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    {% if posts %}
+        {% for post in posts %}
+            <div id="leftside_drafts">
+                <div class="post_details">
+                    <div class="title_details">
+                        <a href="{% url 'details' pk=post.pk %}">{{ post.title }}</a>
+                    </div>
+                    <div class='content_details'>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                    <div class='author'>
+                        {{ post.author }}
+                    </div>
+                </div>
+            </div>
+            <div id="rightside">
+                <span><a href="{% url 'post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-share-alt"></span></a>
+                <span><a href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <span><a href="{% url 'draft_delete' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div id="fullpage">
+            <h3><span style="color: black; padding-left: 20px;">Draft folder is empty...</span></h3>
+        </div>
+    {% endif %}
+{% endblock %}

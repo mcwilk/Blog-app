@@ -1,17 +1,21 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.utils import timezone
 from .models import Post
-from .forms import PostSheet
+from .forms import PostSheet, SignupForm
 
 def index(request):
-    post_list = Post.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:4]
+    post_list = Post.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:]
     unique_years = sorted([d.year for d in Post.objects.all().datetimes('publication_date', 'year')], reverse=True)
     return render(request, 'blog_app/index.html', {'post_list': post_list, 'unique_years': unique_years})
 
 def details(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
     return render(request, 'blog_app/details.html', {'post': post})
 
+@login_required
 def post_add(request):
     if request.method == "POST":
         form = PostSheet(request.POST)
@@ -19,15 +23,15 @@ def post_add(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.publication_date = timezone.now()
             post.save()
-            return redirect('details', pk=post.pk)
+            return redirect('post_drafts')
     
     else:
         form = PostSheet()
 
     return render(request, 'blog_app/post_edition.html', {'form': form})
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
@@ -37,11 +41,46 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.publication_date = timezone.now()
             post.save()
-            return redirect('details', pk=post.pk)
+            return redirect('details', pk=pk)
     
     else:
         form = PostSheet(instance=post)
 
     return render(request, 'blog_app/post_edition.html', {'form': form, 'post': post})
+
+@login_required
+def post_drafts(request):
+    posts = Post.objects.filter(publication_date__isnull=True).order_by('-creation_date')
+    return render(request, 'blog_app/drafts.html', {'posts': posts})
+
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('home')
+
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('home')
+
+@login_required
+def draft_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_drafts')
+
+def signup(request):
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        
+    else:
+        form = SignupForm()
+        
+    return render(request, 'registration/signup.html', {'form': form})
