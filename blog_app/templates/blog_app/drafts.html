@@ -2,29 +2,41 @@
 
 {% block content %}
     {% if posts %}
-        {% for post in posts %}
-            <div id="leftside_drafts">
-                <div class="post_details">
-                    <div class="title_details">
-                        <a href="{% url 'details' pk=post.pk %}">{{ post.title }}</a>
+        <div id="central-drafts">
+
+
+            {% for post in posts %}
+                <div class="post">
+
+
+                    <div class="post-title">
+                        <a href="{% url 'post_edit' pk=post.pk %}">{{ post.title }}</a></br>
+                        <span style="font-size: 18px;">(draft)</span>
                     </div>
-                    <div class='content_details'>
-                        <p>{{ post.text|linebreaksbr }}</p>
+
+                    <div class="post-info">
+                        <span class="glyphicon glyphicon-calendar" style="margin-right: 2px;"></span>
+                        <span style="margin-right: 10px;">{{ post.creation_date|date:'d.m.Y' }}</span>
+                        <span class="glyphicon glyphicon-user" style="margin-right: 2px;"></span>
+                        <span style="margin-right: 10px;">{{ post.author }}</span>
+                        <span><a href="{% url 'post_publish' pk=post.pk %}" style="color: green">Publish</a></span>
+                        <span><a href="{% url 'post_edit' pk=post.pk %}" style="color: blueviolet">Edit</a></span>
+                        <span><a href="{% url 'draft_delete' pk=post.pk %}" style="color: red">Delete</a></span>
+                 
                     </div>
-                    <div class='author'>
-                        {{ post.author }}
+
+                    <div class="content">
+                        {{post.text|truncatewords:120}}</br>
                     </div>
+                    
                 </div>
-            </div>
-            <div id="rightside">
-                <span><a href="{% url 'post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-share-alt"></span></a>
-                <span><a href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                <span><a href="{% url 'draft_delete' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-            </div>
-        {% endfor %}
+            {% endfor %}
+
+        </div>
     {% else %}
-        <div id="fullpage">
+        <div id="leftside">
             <h3><span style="color: black; padding-left: 20px;">Draft folder is empty...</span></h3>
         </div>
     {% endif %}
+    
 {% endblock %}

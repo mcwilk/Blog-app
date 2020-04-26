@@ -10,7 +10,7 @@
     {% else %}
         <h2>Add new post</h2>
     {% endif %}
-    <div class=post_form>
+    <div class=post-form>
         <form method="POST">{% csrf_token %}
             {{ form.as_p }}
             {% if post.publication_date %}

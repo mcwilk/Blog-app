@@ -1,53 +1,71 @@
 {% extends 'blog_app/base.html' %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <div id="leftside">
-    {% else %}
-        <div id="fullpage">
-    {% endif %}
-        <div class="post_details">
-            <div class="title_details">
+    <div id="central">
+        <div class="post">
+
+            <div class="post-title">
                 {{ post.title }}
-                {% if post.publication_date %}
-                    <span>{{ post.publication_date|date:'d-m-Y' }}</span>
+            </div>
+
+            <div class="post-info">
+                <span class="glyphicon glyphicon-calendar" style="margin-right: 2px;"></span>
+                <span style="margin-right: 10px;">{{ post.publication_date|date:'d.m.Y' }}</span>
+                <span class="glyphicon glyphicon-user" style="margin-right: 2px;"></span>
+                <span style="margin-right: 10px;">{{ post.author }}</span>
+                <span class="glyphicon glyphicon-comment" style="margin-right: 2px;"></span>
+                <span style="margin-right: 10px;">{{ post.comments.count }}</span></a>
+                <span class="glyphicon glyphicon-eye-open" style="margin-right: 2px;"></span>
+                <span style="margin-right: 10px;">{{ post.counter }} 
+                    {% if post.counter == 1 %}
+                        view
+                    {% else %}
+                        views
+                    {% endif %}
+                </span>
+                {% if user.is_superuser %}
+                    {% if not post.publication_date %}
+                        <span><a href="{% url 'post_publish' pk=post.pk %}" style="color: green">Publish</a></span>
+                        <span><a href="{% url 'draft_delete' pk=post.pk %}" style="color: red">Delete</a></span>
+                    {% else %}
+                        <span><a href="{% url 'post_edit' pk=post.pk %}" style="color: blueviolet">Edit</a></span>
+                        <span><a href="{% url 'post_delete' pk=post.pk %}" style="color: red">Delete</a></span>
+                    {% endif %}
                 {% endif %}
             </div>
-            <div class='content_details'>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-            <div class='author'>
-                {{ post.author }}
-            </div>
-            {% if user.is_authenticated %}
-                <div class=comment_form>
-                    <form method="POST">{% csrf_token %}
-                        {{ form.as_p }}
-                        <button style="margin-right: 10px;" class="btn btn-primary pull-right" type="submit">Send</button>
-                    </form>
-                </div>
-            {% else %}
-                <p> To add comments you need to <a href="{% url 'login' %}">LogIn</a></p>
-            {% endif %}
-            {% for comment in comments_list %}
-                <div class="comment">
-                    <div class="date">{{ comment.created_on }}</div>
-                    <strong>{{ comment.author }}</strong>
-                    <p>{{ comment.text|linebreaks }}</p>
-                </div>
-            {% empty %}
-                <p>There is no comments yet.</p>
-            {% endfor %}
-        </div>
-    </div>
 
-    {% if user.is_authenticated %}
-        <div id="rightside">
-            {% if not post.publication_date %}
-                <span><a href="{% url 'post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-share-alt"></span></a>
-                <span><a href="{% url 'draft_delete' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-            {% endif %}
-            <span><a href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <div class="content">
+                {{post.text|linebreaksbr}}
+            </div>
+            
         </div>
-    {% endif %}
+
+        {% if user.is_authenticated %}
+            <div class=comment-form>
+                <form method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button style="margin-right: 40px;" class="btn btn-primary pull-right" type="submit">Send</button>
+                </form>
+            </div>
+        {% else %}
+            <div id="info">
+                <a href="{% url 'login' %}">Login</a> to add comments.
+            </div>
+        {% endif %}
+        
+        <div class="comment">
+        {% for comment in comments_list %}
+            <div class="comment-info">
+                <span style="font-size: 17px;"><strong>{{ comment.author }} &diams; </strong></span>
+                <span>{{ comment.created_on }}</span>
+                {% if user.is_superuser %}
+                    <span style="color: red"><a href="{% url 'comment_delete' pk=comment.pk %}">Delete</a></span>
+                {% endif %}
+            </div>
+            {{comment.text|linebreaksbr}}
+        {% empty %}
+            <div id="info">There is no comments yet.</div>
+        {% endfor %}
+        </div> 
+    </div>
 {% endblock %}

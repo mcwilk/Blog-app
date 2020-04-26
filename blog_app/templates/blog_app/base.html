@@ -8,8 +8,8 @@
 	<meta name="keywords" content="Django, project, blog, Python, backend, frontend, framework, programming, web development" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap&subset=latin-ext">
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;500&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{% static 'blog_app/style.css' %}" type="text/css" >
 
@@ -21,22 +21,29 @@
 	<div id="container">
 
 		<div id="topbar">
-			<a href="{% url 'home' %}">Blog</a>
+			<div class="optionL"><a href="{% url 'home' %}">Home</a></div>
+			<div class="optionL"><a href="{% url 'home' %}">Archive</a></div>
+			<div class="optionL"><a href="{% url 'home' %}">About</a></div>
 			{% if not user.is_authenticated %}
-				<a href="{% url 'signup' %}"><span style="float:right; font-size:20px; letter-spacing: 0px; margin: 25px 15px 0px 0px">Sign up</span></a>
-				<a href="{% url 'login' %}"><span style="float:right; font-size:20px; letter-spacing: 0px; margin: 25px 15px 0px 0px">Login</span></a>
+				<div class="optionR"><a href="{% url 'login' %}">Login</a></div>
+				<div class="optionR"><a href="{% url 'signup' %}">Signup</span></a></div>
 			{% else %}
-				<a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span></a>
-				<span style="float:right; font-size:20px; letter-spacing: 0px; padding: 25px 15px 0px 0px">{{ user }}</span>
+				<div class="optionR"><a href="{% url 'logout' %}">(Logout)</a></div>
+				<div class="optionR">{{ user }}</div>
+				<div style="clear: both;"></div>
 			{% endif %}
 		</div>
+		
+		<div id="titlebar">
+			<a href="{% url 'home' %}">Blog tytułowy</a>
+			<p>Przykładowy tekst dolny</p>
+		</div>
+
 		{% if user.is_superuser %}
 			<div id="adminbar">
-				<div id="adminbar_text">
-					Admin mode: ON
-					<a href="{% url 'post_drafts' %}"><span class="glyphicon glyphicon-folder-open"></span></a>
-					<a href="{% url 'post_add' %}"><span class="glyphicon glyphicon-plus"></span></a>
-				</div>
+				ADMIN MODE
+				<button class="btn btn-default"><a href="{% url 'post_drafts' %}">Drafts</a></button>
+				<button class="btn btn-default"><a href="{% url 'post_add' %}">Write</a></button>
 			</div>
 		{% endif %}
 		

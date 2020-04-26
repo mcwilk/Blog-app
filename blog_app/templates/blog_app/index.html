@@ -6,26 +6,62 @@
         {% for post in post_list %}
             <div class="post">
 
-                <div class="title">
+                <div class="post-title">
                     <a href="{% url 'details' pk=post.pk %}">{{ post.title }}</a>
-                    <span>{{ post.publication_date|date:'d-m-Y' }}</span>
+                </div>
+
+                <div class="post-info">
+                    <span class="glyphicon glyphicon-calendar" style="margin-right: 2px;"></span>
+                    <span style="margin-right: 10px;">{{ post.publication_date|date:'d.m.Y' }}</span>
+                    <span class="glyphicon glyphicon-user" style="margin-right: 2px;"></span>
+                    <span style="margin-right: 10px;">{{ post.author }}</span>
+                    <span class="glyphicon glyphicon-comment" style="margin-right: 2px;"></span>
+                    <span style="margin-right: 10px;">{{ post.comments.count }}</span>
+                    <span class="glyphicon glyphicon-eye-open" style="margin-right: 2px;"></span>
+                    <span style="margin-right: 10px;">{{ post.counter }} 
+                        {% if post.counter == 1 %}
+                            view
+                        {% else %}
+                            views
+                        {% endif %}
+                    </span>
+                    
                 </div>
 
                 <div class="content">
-                    {{post.text|truncatechars:1500}}
+                    {{post.text|truncatewords:120}}</br>
+                    <div class="content-link">
+                        <a href="{% url 'details' pk=post.pk %}">READ MORE</a>
+                    </div>
                 </div>
-                <a href="{% url 'details' pk=post.pk %}">{{ post.comments.count }} comments</a>
+                <div class="post-categories">
+                    <button>{{post.get_category1_display}}</button>
+                    {% if post.category2 %}
+                        <button>{{post.get_category2_display}}</button>
+                    {% endif %}
+                    {% if post.category3 %}
+                        <button>{{post.get_category3_display}}</button>
+                    {% endif %}
+
+                </div>
+                
             </div>
         {% endfor %}
 
     </div>
-            
+
     <div id="rightside">
+        <div id="about">
+            <div id="about-title">About</div>
+            <div id="about-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur lorem eu ante accumsan, tristique ultrices ante lobortis. Suspendisse sed nisi sed tellus euismod iaculis sit amet in arcu. 
+            </div>
+        </div>
         <div id="archive">
-            <div id="archive_title">Archive</div>
+            <div id="archive-title">Archive</div>
             {% for year in unique_years %}
-                <div class="year">
-                    {{ year }}
+                <div class="archive-year">
+                    <a>{{ year }}</a>
                 </div>
             {% endfor %}
         </div>

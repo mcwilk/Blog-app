@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.utils import timezone
-from .models import Post
+from .models import Post, Comment
 from .forms import PostSheet, SignupForm, CommentForm
 
 def index(request):
@@ -12,7 +12,10 @@ def index(request):
 
 def details(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    post.counter += 1
+    post.save()
     comments_list = post.comments.all().order_by('-created_on')
+    #sort_comments_asc = post.comments.all().order_by('created_on')
     
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -98,3 +101,9 @@ def signup(request):
         form = SignupForm()
         
     return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('details', pk=comment.post.pk)

@@ -7,7 +7,8 @@ class PostSheet(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'category1', 'category2', 'category3']
+        labels = {'category1': 'category', 'category2': 'category', 'category3': 'category'}
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(required=False)
