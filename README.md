@@ -19,7 +19,7 @@ Frontend: HTML5, CSS
 
 Database: SQLite (default for Django)
 
-Demo available on: 
+Demo available on: http://mcwilk.pythonanywhere.com/
 
 ## Technologies
 * Python 3.x
