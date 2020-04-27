@@ -14,7 +14,9 @@ This application has many functionalities typical for blog applications. It allo
 - check history of posts etc.
 
 Backend: Python/Django 
+
 Frontend: HTML5, CSS
+
 Database: SQLite (default for Django)
 
 Demo available on: 
