@@ -28,7 +28,7 @@ Demo available on:
 * CSS
 
 ## Status
-Project is: _finished_
+Project is: _Mostly finished, but I do not exclude improvements/new features in the future._
 
 ## Contact
 maciej.wilk04@gmail.com
