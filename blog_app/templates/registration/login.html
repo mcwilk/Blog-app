@@ -1,23 +1,28 @@
 {% extends 'blog_app/base.html' %}
 
 {% block content %}
-    {% if form.errors %}
-        <p>Wrong username and/or password.</p>
-        <p> If you do not have an account <a href="{% url 'signup' %}">sign up</a></p>
-    {% endif %}
 
-    <form method="post" action="{% url 'login' %}">{% csrf_token %}
-        <table>
-        <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-        </table>
+    <div class="login-form"">
+        <form method="post" action="{% url 'login' %}">{% csrf_token %}
+            <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+            </table>
 
-        <input type="submit" value="Login" />
-    </form>
+            {% if form.errors %}
+                <div style="margin: 20px 0px 0px 20px">
+                    Wrong username and/or password.</br>
+                    If you do not have an account <a href="{% url 'signup' %}">sign up</a>.
+                </div>
+            {% endif %}
+
+            <button class="btn btn-success" type="submit">Login</button>
+        </form>
+    </div>
 {% endblock %}

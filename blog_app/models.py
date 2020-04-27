@@ -15,7 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='post_author')
     creation_date = models.DateTimeField(default=timezone.now)
     publication_date = models.DateTimeField(null=True, blank=True)
-    category1 = models.SmallIntegerField(choices=CATEGORIES, default=1)
+    category1 = models.SmallIntegerField(choices=CATEGORIES)
     category2 = models.SmallIntegerField(choices=CATEGORIES, null=True, blank=True)
     category3 = models.SmallIntegerField(choices=CATEGORIES, null=True, blank=True)
     counter = models.SmallIntegerField(default=0)

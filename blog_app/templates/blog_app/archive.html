@@ -1,0 +1,13 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    <div id="central">
+
+        <div class="post">
+            {% for year in unique_years %}
+                    <h3 style="text-align: center"><a style="text-decoration: None;" href="{% url 'archive_list' year=year %}">{{ year }}</a></h3>
+            {% endfor %}
+        </div>
+    
+    </div>
+{% endblock %}

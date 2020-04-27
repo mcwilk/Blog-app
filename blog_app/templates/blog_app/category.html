@@ -1,0 +1,15 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    <div id="central">
+        <div class="post">
+            <h3>List of posts for "{{cat_name}}" category:</h3></br>
+            {% for post in post_cat_list %}
+                <div class="post-lists">
+                    <a href="{% url 'details' pk=post.pk %}">{{ forloop.counter }}. {{ post }}</a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

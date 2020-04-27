@@ -35,14 +35,13 @@
                     </div>
                 </div>
                 <div class="post-categories">
-                    <button>{{post.get_category1_display}}</button>
+                    <a href="{% url 'category' number=post.category1 %}"><button>{{post.get_category1_display}}</button></a>
                     {% if post.category2 %}
-                        <button>{{post.get_category2_display}}</button>
+                    <a href="{% url 'category' number=post.category2 %}"><button>{{post.get_category2_display}}</button></a>
                     {% endif %}
                     {% if post.category3 %}
-                        <button>{{post.get_category3_display}}</button>
+                    <a href="{% url 'category' number=post.category3 %}"><button>{{post.get_category3_display}}</button></a>
                     {% endif %}
-
                 </div>
                 
             </div>
@@ -61,7 +60,7 @@
             <div id="archive-title">Archive</div>
             {% for year in unique_years %}
                 <div class="archive-year">
-                    <a>{{ year }}</a>
+                    <a href="{% url 'archive_list' year=year %}">{{ year }}</a>
                 </div>
             {% endfor %}
         </div>

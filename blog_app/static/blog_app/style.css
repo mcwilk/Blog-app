@@ -169,7 +169,7 @@ body
     border-top: dashed ;
     border-width: 1px;
     border-color: rgb(209, 209, 209);
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .post-categories button
@@ -188,6 +188,17 @@ body
     min-height: 200px;
 }
 
+.post-lists
+{
+    font-size: 20px;
+    margin-left: 25px;
+}
+
+.post-lists a
+{
+    text-decoration: none;
+}
+
 .comment-form textarea, .comment-form input, .comment-form label
 {
     width: 95%;
@@ -195,18 +206,24 @@ body
     margin: 0px 0px 0px 20px;
 }
 
-#info, #info a
+#info
 {
-    margin: 60px 0px 60px 10px;
+    margin: 75px 0px 80px 40px;
     font-size: 20px;
-    text-decoration: None;
+    font-style: italic;
+}
+
+#login-info
+{
+    margin: 0px 0px 0px 40px;
+    font-size: 20px;
 }
 
 .comment
 {
     color: rgb(56, 56, 56);
     font-style: italic;
-    margin: 0px 50px 150px 40px;
+    margin: 0px 60px 55px 40px;
 }
 
 .comment-info
@@ -286,12 +303,50 @@ body
 .post-form
 {
     min-height: 450px;
+    width: 840px;
+    margin: 0px 80px 0px 80px;
 }
 
 .post-form textarea, .post-form input 
 {
     width: 100%;
 }
+
+.post-form button
+{
+    margin-right: 20px;
+    margin-bottom: 100px;
+}
+
+.signup-form
+{
+    min-height: 450px;
+    width: 600px;
+    margin: 0px 200px 0px 200px;
+}
+
+.singup-form textarea, .signup-form input 
+{
+    width: 100%;
+}
+
+.signup-form button
+{
+    margin: 15px 15px 100px 0px; 
+}
+
+.login-form
+{
+    min-height: 450px;
+    margin: 50px 350px 0px 350px;
+}
+
+.login-form button
+{
+    width: 80px;
+    margin: 20px 0px 0px 90px; 
+}
+
 
 #footer
 {

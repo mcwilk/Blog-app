@@ -1,22 +1,23 @@
 {% extends 'blog_app/base.html' %}
 
 {% block content %}
-    {% if post %}
-        {% if post.publication_date %}
-            <h2>Edit post</h2>
-        {% else %}
-            <h2>Edit draft</h2>
-        {% endif %}
-    {% else %}
-        <h2>Add new post</h2>
-    {% endif %}
+
     <div class=post-form>
+        {% if post %}
+            {% if post.publication_date %}
+                <h2>Edit post</h2>
+            {% else %}
+                <h2>Edit draft</h2>
+            {% endif %}
+        {% else %}
+            <h2>Add new post</h2>
+        {% endif %}
         <form method="POST">{% csrf_token %}
             {{ form.as_p }}
             {% if post.publication_date %}
-                <button style="margin-right: 10px;" class="btn btn-primary pull-right" type="submit">Save edited post</button>
+                <button class="btn btn-primary pull-right" type="submit">Save edited post</button>
             {% else %}
-                <button style="margin-right: 10px;" class="btn btn-primary pull-right" type="submit">Save draft</button>
+                <button class="btn btn-primary pull-right" type="submit">Save draft</button>
             {% endif %}
         </form>
     </div>

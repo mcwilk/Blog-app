@@ -1,0 +1,16 @@
+{% extends 'blog_app/base.html' %}
+
+{% block content %}
+    <div id="central">
+        <div class="post">
+
+            <h2 style="text-align: center;">{{ year }}</h2></br>
+            {% for post in post_year_list %}
+                <div class="post-lists">
+                    <a href="{% url 'details' pk=post.pk %}">{{ forloop.counter }}. {{ post }}</a>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+{% endblock %}

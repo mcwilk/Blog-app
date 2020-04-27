@@ -12,4 +12,8 @@ urlpatterns = [
     path('posts/draft/delete/<int:pk>', views.draft_delete, name='draft_delete'),
     path('users/signup/', views.signup, name='signup'),
     path('comment/delete/<int:pk>', views.comment_delete, name='comment_delete'),
+    path('posts/category/<int:number>', views.category, name='category'),
+    path('posts/archive/<int:year>', views.archive_list, name='archive_list'),
+    path('archive', views.archive, name='archive'),
+    path('about', views.about, name='about'),
 ]

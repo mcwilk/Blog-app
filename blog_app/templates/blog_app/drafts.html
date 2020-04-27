@@ -4,10 +4,8 @@
     {% if posts %}
         <div id="central-drafts">
 
-
             {% for post in posts %}
                 <div class="post">
-
 
                     <div class="post-title">
                         <a href="{% url 'post_edit' pk=post.pk %}">{{ post.title }}</a></br>
@@ -34,8 +32,8 @@
 
         </div>
     {% else %}
-        <div id="leftside">
-            <h3><span style="color: black; padding-left: 20px;">Draft folder is empty...</span></h3>
+        <div id="central">
+            <h3><span style="color: black; padding-left: 20px;">Folder is empty...</span></h3>
         </div>
     {% endif %}
     

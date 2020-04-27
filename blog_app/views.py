@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.utils import timezone
 from .models import Post, Comment
 from .forms import PostSheet, SignupForm, CommentForm
 
 def index(request):
-    post_list = Post.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:]
+    post_list = Post.objects.filter(publication_date__lte=timezone.now()).order_by('-publication_date')[:5]
     unique_years = sorted([d.year for d in Post.objects.all().datetimes('publication_date', 'year')], reverse=True)
     return render(request, 'blog_app/index.html', {'post_list': post_list, 'unique_years': unique_years})
 
@@ -107,3 +106,19 @@ def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('details', pk=comment.post.pk)
+
+def category(request, number):
+    post_cat_list = (Post.objects.filter(category1=number) | Post.objects.filter(category2=number) | Post.objects.filter(category3=number)).order_by('-publication_date')
+    cat_name = Post.CATEGORIES[number - 1][1]
+    return render(request, 'blog_app/category.html', {'post_cat_list': post_cat_list, 'cat_name': cat_name})
+
+def archive(request):
+    unique_years = sorted([d.year for d in Post.objects.all().datetimes('publication_date', 'year')], reverse=True)
+    return render(request, 'blog_app/archive.html', {'unique_years': unique_years})
+
+def archive_list(request, year):
+    post_year_list = Post.objects.filter(publication_date__year=year)
+    return render(request, 'blog_app/archive_list.html', {'post_year_list': post_year_list, 'year': year})
+
+def about(request):
+    return render(request, 'blog_app/about.html')
