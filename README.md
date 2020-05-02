@@ -15,7 +15,7 @@ This application has many functionalities typical for blog applications. It allo
 
 Backend: Python/Django 
 
-Frontend: HTML5, CSS3
+Frontend: HTML, CSS3
 
 Database: SQLite (default for Django)
 
@@ -24,7 +24,7 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 ## Technologies
 * Python 3.x
 * Django 2.x
-* HTML5
+* HTML
 * CSS3
 
 ## Status
