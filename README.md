@@ -27,6 +27,7 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 * Django 2.x
 * HTML
 * CSS3
+* SQLite
 
 ## Screenshots
 
