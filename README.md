@@ -1,6 +1,7 @@
 ## Table of Contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Screenshots](#screenshots)
 * [Status](#status)
 * [Sources](#sources)
 * [Contact](#contact)
@@ -26,6 +27,15 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 * Django 2.x
 * HTML
 * CSS3
+
+## Screenshots
+Sample drawings:
+
+![Screenshot1]
+
+![Screenshot2]
+
+![Screenshot3]
 
 ## Status
 Project is: _Mostly finished, but I do not exclude improvements/new features in the future._
