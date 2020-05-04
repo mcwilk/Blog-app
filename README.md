@@ -29,7 +29,6 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 * CSS3
 
 ## Screenshots
-Sample drawings:
 
 Screenshot 1:
 
