@@ -31,11 +31,11 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 ## Screenshots
 Sample drawings:
 
-![Screenshot1]
+![Screenshot1](./Screenshots/main_page.png)
 
-![Screenshot2]
+![Screenshot2](./Screenshots/edition.png)
 
-![Screenshot3]
+![Screenshot3](./Screenshots/comments.png)
 
 ## Status
 Project is: _Mostly finished, but I do not exclude improvements/new features in the future._
