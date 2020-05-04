@@ -32,12 +32,15 @@ Demo available on: http://mcwilk.pythonanywhere.com/
 Sample drawings:
 
 Screenshot 1:
+
 ![Screenshot1](./Screenshots/main_page.png)
 
 Screenshot 2:
+
 ![Screenshot2](./Screenshots/edition.png)
 
 Screenshot 3:
+
 ![Screenshot3](./Screenshots/comments.png)
 
 ## Status
